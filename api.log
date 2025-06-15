@@ -2976,3 +2976,79 @@ LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
 2025-06-15 17:41:54,418 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
 2025-06-15 17:41:54,418 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
 2025-06-15 17:41:54,420 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:44:26,844 - INFO - HTTP Request: GET https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json "HTTP/1.1 200 OK"
+2025-06-15 17:44:47,695 - INFO - Processing file upload to directory: bfc36648-d83e-461a-a0ab-44d7592f150b
+2025-06-15 17:44:47,695 - INFO - Saving file: wall.png to datasets/bfc36648-d83e-461a-a0ab-44d7592f150b/wall.png
+2025-06-15 17:44:47,698 - INFO - Upload response: {'status': 'success', 'directory': 'bfc36648-d83e-461a-a0ab-44d7592f150b', 'message': 'Files uploaded successfully to bfc36648-d83e-461a-a0ab-44d7592f150b'}
+2025-06-15 17:44:47,767 - INFO - Received request with prompt: Train and evaluate models on the diabetes-readmission dataset using AUC as the evaluation metric
+2025-06-15 17:44:47,783 - INFO - 
+LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
+2025-06-15 17:44:52,256 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-06-15 17:44:52,261 - INFO - Wrapper: Completed Call, calling success_handler
+2025-06-15 17:44:52,263 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:44:52,264 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:44:52,270 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:44:52,300 - INFO - 
+LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
+2025-06-15 17:44:57,235 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-06-15 17:44:57,237 - INFO - Wrapper: Completed Call, calling success_handler
+2025-06-15 17:44:57,237 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:44:57,239 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:44:57,250 - INFO - 
+LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
+2025-06-15 17:45:01,823 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-06-15 17:45:01,825 - INFO - Wrapper: Completed Call, calling success_handler
+2025-06-15 17:45:01,826 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:01,831 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:02,062 - INFO - Skipping import error while copying six.moves.dbm_gnu: ImportError - No module named '_gdbm', please install the python3-gdbm package
+2025-06-15 17:45:02,087 - INFO - 
+LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
+2025-06-15 17:45:06,712 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-06-15 17:45:06,714 - INFO - Wrapper: Completed Call, calling success_handler
+2025-06-15 17:45:06,715 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:06,722 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:06,758 - INFO - Skipping import error while copying six.moves.dbm_gnu: ImportError - No module named '_gdbm', please install the python3-gdbm package
+2025-06-15 17:45:06,764 - INFO - 
+LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
+2025-06-15 17:45:12,540 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-06-15 17:45:12,543 - INFO - Wrapper: Completed Call, calling success_handler
+2025-06-15 17:45:12,543 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:12,626 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:12,651 - INFO - Skipping import error while copying six.moves.dbm_gnu: ImportError - No module named '_gdbm', please install the python3-gdbm package
+2025-06-15 17:45:12,655 - INFO - 
+LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
+2025-06-15 17:45:19,484 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-06-15 17:45:19,486 - INFO - Wrapper: Completed Call, calling success_handler
+2025-06-15 17:45:19,487 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:19,487 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:19,498 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:19,517 - INFO - Skipping import error while copying six.moves.dbm_gnu: ImportError - No module named '_gdbm', please install the python3-gdbm package
+2025-06-15 17:45:19,550 - INFO - 
+LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
+2025-06-15 17:45:24,688 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-06-15 17:45:24,694 - INFO - Wrapper: Completed Call, calling success_handler
+2025-06-15 17:45:24,694 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:24,694 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:24,700 - INFO - 
+LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
+2025-06-15 17:45:24,701 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:34,346 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-06-15 17:45:34,349 - INFO - Wrapper: Completed Call, calling success_handler
+2025-06-15 17:45:34,349 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:34,349 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:34,351 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:34,456 - INFO - 
+LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
+2025-06-15 17:45:45,089 - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-06-15 17:45:45,093 - INFO - Wrapper: Completed Call, calling success_handler
+2025-06-15 17:45:45,093 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:45,100 - INFO - selected model name for cost calculation: anthropic/claude-sonnet-4-20250514
+2025-06-15 17:45:45,114 - INFO - 
+LiteLLM completion() model= claude-sonnet-4-20250514; provider = anthropic
+2025-06-15 17:46:04,096 - INFO - HTTP Request: GET https://raw.githubusercontent.com/BerriAI/litellm/main/model_prices_and_context_window.json "HTTP/1.1 200 OK"
+2025-06-15 17:47:30,934 - INFO - Processing file upload to directory: 854db20c-dc77-4db2-98d3-99a0eb3a25df
+2025-06-15 17:47:30,935 - INFO - Saving file: Cargo.toml to datasets/854db20c-dc77-4db2-98d3-99a0eb3a25df/Cargo.toml
+2025-06-15 17:47:30,935 - INFO - Upload response: {'status': 'success', 'directory': '854db20c-dc77-4db2-98d3-99a0eb3a25df', 'message': 'Files uploaded successfully to 854db20c-dc77-4db2-98d3-99a0eb3a25df'}
+2025-06-15 17:48:46,909 - INFO - Processing file upload to directory: d922ab2d-524a-4b82-9ae0-0d60baa47b11
+2025-06-15 17:48:46,909 - INFO - Saving file: SnakeLemma01.png to datasets/d922ab2d-524a-4b82-9ae0-0d60baa47b11/SnakeLemma01.png
+2025-06-15 17:48:46,910 - INFO - Upload response: {'status': 'success', 'directory': 'd922ab2d-524a-4b82-9ae0-0d60baa47b11', 'message': 'Files uploaded successfully to d922ab2d-524a-4b82-9ae0-0d60baa47b11'}

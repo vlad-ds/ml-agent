@@ -20,7 +20,7 @@ export default function Home() {
           </p>
           <div className="flex gap-4 justify-center">
             <Button size="lg" asChild>
-              <Link href="/analyze">
+              <Link href="/upload">
                 Start now <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
