@@ -14,22 +14,7 @@ def main():
 
     # Create the manager agent with both agents
     manager_agent = create_manager_agent(model, [analysis_agent, modeling_agent])
-
-    # First, check if analysis results exist
-    if not os.path.exists('analysis_results/dataset_analysis.json'):
-        print("Running analysis agent...")
-        analysis_result = manager_agent.run("Analyze the datasets/diabetes-readmission dataset")
-        print("Dataset Analysis Results:")
-        print(analysis_result)
-        print("\n" + "="*50 + "\n")
-    else:
-        print("Analysis results already exist, skipping analysis step...")
-
-    # Then, train and evaluate models
-    print("Running modeling agent...")
-    modeling_result = manager_agent.run("Train and evaluate models on datasets/diabetes-readmission. Use AUC as the evaluation metric")
-    print("Modeling Results:")
-    print(modeling_result)
+    manager_agent.run("Analyze the datasets/diabetes-readmission dataset, then train and evaluate models on datasets/diabetes-readmission. Use AUC as the evaluation metric ")
 
 if __name__ == "__main__":
     main()
