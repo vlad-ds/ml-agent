@@ -9,27 +9,16 @@ interface AnalysisPageProps {
   }>
 }
 
-interface DatasetAnalysis {
-  samples: number
-  features: number
-  feature_types: string
-  target_balance: string
-  data_quality: string
-}
-
-interface ModelPerformance {
-  best_model: string
-  test_auc: number
-  test_accuracy: number
-  cv_auc: string
-  features_used: number
-  features_removed: number
-}
-
 interface AnalysisResult {
-  dataset_analysis: DatasetAnalysis
-  model_performance: ModelPerformance
-  key_insights: string[]
+  task_completed: string
+  best_model: string
+  best_auc_score: number
+  cv_auc_mean: number
+  cv_auc_std: number
+  model_rankings: [string, number][]
+  top_features: string[]
+  model_stability: string
+  recommendation: string
 }
 
 export default function AnalysisPage({ params }: AnalysisPageProps) {
@@ -56,13 +45,48 @@ export default function AnalysisPage({ params }: AnalysisPageProps) {
           throw new Error('Analysis failed')
         }
 
+        console.log(response)
+
         const data = await response.json()
         
+        console.log('API Response:', {
+          status: data.status,
+          result: {
+            task_completed: data.result?.task_completed,
+            best_model: data.result?.best_model,
+            best_auc_score: data.result?.best_auc_score,
+            cv_auc_mean: data.result?.cv_auc_mean,
+            cv_auc_std: data.result?.cv_auc_std,
+            model_rankings: data.result?.model_rankings,
+            top_features: data.result?.top_features,
+            model_stability: data.result?.model_stability,
+            recommendation: data.result?.recommendation
+          }
+        })
+        
         // Validate the response structure
-        if (!data.result || !data.result.dataset_analysis || !data.result.model_performance || !data.result.key_insights) {
+        if (!data.status || data.status !== "success" || !data.result || 
+            !data.result.task_completed || !data.result.best_model || 
+            typeof data.result.best_auc_score !== 'number' ||
+            !Array.isArray(data.result.model_rankings) ||
+            !Array.isArray(data.result.top_features) ||
+            !data.result.model_stability ||
+            !data.result.recommendation) {
+          console.error('Validation failed:', {
+            status: data.status,
+            hasResult: !!data.result,
+            taskCompleted: !!data.result?.task_completed,
+            bestModel: !!data.result?.best_model,
+            bestAucScore: typeof data.result?.best_auc_score,
+            modelRankings: Array.isArray(data.result?.model_rankings),
+            topFeatures: Array.isArray(data.result?.top_features),
+            modelStability: !!data.result?.model_stability,
+            recommendation: !!data.result?.recommendation
+          })
           throw new Error('Invalid response structure from API')
         }
 
+        console.log('Validation passed, setting analysis result')
         setAnalysisResult(data.result)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred')
@@ -108,97 +132,118 @@ export default function AnalysisPage({ params }: AnalysisPageProps) {
             </Card>
           )}
 
-          {analysisResult && analysisResult.dataset_analysis && (
+          {analysisResult && (
             <div className="space-y-6">
-              {/* Dataset Analysis */}
+              {/* Task Status */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Dataset Overview</CardTitle>
-                  <CardDescription>Basic information about your dataset</CardDescription>
+                  <CardTitle>Task Status</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-lg">{analysisResult.task_completed}</p>
+                </CardContent>
+              </Card>
+
+              {/* Model Performance */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Model Performance</CardTitle>
+                  <CardDescription>Results from model evaluation</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-sm font-medium">Samples</p>
-                      <p className="text-2xl font-bold">{analysisResult.dataset_analysis.samples.toLocaleString()}</p>
+                      <p className="text-sm font-medium">Best Model</p>
+                      <p className="text-lg font-semibold">{analysisResult.best_model}</p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium">Features</p>
-                      <p className="text-2xl font-bold">{analysisResult.dataset_analysis.features}</p>
+                      <p className="text-sm font-medium">Best AUC Score</p>
+                      <p className="text-2xl font-bold">{(analysisResult.best_auc_score * 100).toFixed(1)}%</p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium">Feature Types</p>
-                      <p className="text-lg">{analysisResult.dataset_analysis.feature_types}</p>
+                      <p className="text-sm font-medium">Cross-Validation AUC</p>
+                      <p className="text-lg">{(analysisResult.cv_auc_mean * 100).toFixed(1)}% ± {(analysisResult.cv_auc_std * 100).toFixed(2)}%</p>
                     </div>
                     <div>
-                      <p className="text-sm font-medium">Target Balance</p>
-                      <p className="text-lg">{analysisResult.dataset_analysis.target_balance}</p>
-                    </div>
-                    <div className="col-span-2">
-                      <p className="text-sm font-medium">Data Quality</p>
-                      <p className="text-lg">{analysisResult.dataset_analysis.data_quality}</p>
+                      <p className="text-sm font-medium">Model Stability</p>
+                      <p className="text-lg">{analysisResult.model_stability}</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Model Performance */}
-              {analysisResult.model_performance && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Model Performance</CardTitle>
-                    <CardDescription>Results from the best performing model</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-sm font-medium">Best Model</p>
-                        <p className="text-lg font-semibold">{analysisResult.model_performance.best_model}</p>
+              {/* Model Rankings */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Model Rankings</CardTitle>
+                  <CardDescription>Performance comparison of all models</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {analysisResult.model_rankings.map(([model, score], index) => (
+                      <div key={index} className="flex items-center justify-between">
+                        <span className="font-medium">{model}</span>
+                        <span className="text-lg font-semibold">{(score * 100).toFixed(1)}%</span>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium">Test AUC</p>
-                        <p className="text-2xl font-bold">{(analysisResult.model_performance.test_auc * 100).toFixed(1)}%</p>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">Test Accuracy</p>
-                        <p className="text-2xl font-bold">{(analysisResult.model_performance.test_accuracy * 100).toFixed(1)}%</p>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">Cross-Validation AUC</p>
-                        <p className="text-lg">{analysisResult.model_performance.cv_auc}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">Features Used</p>
-                        <p className="text-lg">{analysisResult.model_performance.features_used}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">Features Removed</p>
-                        <p className="text-lg">{analysisResult.model_performance.features_removed}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
 
-              {/* Key Insights */}
-              {analysisResult.key_insights && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Key Insights</CardTitle>
-                    <CardDescription>Important findings from the analysis</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {analysisResult.key_insights.map((insight, index) => (
-                        <li key={index} className="flex items-start">
-                          <span className="mr-2">•</span>
-                          <span>{insight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              )}
+              {/* Top Features */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Top Features</CardTitle>
+                  <CardDescription>Most important features for prediction</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {analysisResult.top_features.map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="mr-2">•</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {/* Recommendation */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Recommendation</CardTitle>
+                  <CardDescription>Model deployment suggestion</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-lg">{analysisResult.recommendation}</p>
+                </CardContent>
+              </Card>
+
+              {/* Debug Section */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Debug Information</CardTitle>
+                  <CardDescription>Raw data structure verification</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <pre className="bg-gray-50 p-4 rounded-lg overflow-auto text-sm">
+                    {JSON.stringify({
+                      status: "success",
+                      result: {
+                        task_completed: analysisResult.task_completed,
+                        best_model: analysisResult.best_model,
+                        best_auc_score: analysisResult.best_auc_score,
+                        cv_auc_mean: analysisResult.cv_auc_mean,
+                        cv_auc_std: analysisResult.cv_auc_std,
+                        model_rankings: analysisResult.model_rankings,
+                        top_features: analysisResult.top_features,
+                        model_stability: analysisResult.model_stability,
+                        recommendation: analysisResult.recommendation
+                      }
+                    }, null, 2)}
+                  </pre>
+                </CardContent>
+              </Card>
             </div>
           )}
         </div>
