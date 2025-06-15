@@ -1,0 +1,18 @@
+{
+  "dataset_info": {
+    "name": "Diabetes Readmission Dataset",
+    "path": "datasets/diabetes-readmission",
+    "type": "Binary Classification",
+    "suitable_for_auc": true,
+    "total_samples": {
+      "train": 81410,
+      "test": 20353,
+      "total": 101763
+    },
+    "total_features": 150,
+    "target_variable": "readmitted"
+  },
+  "target_analysis": {
+    "classification_type": "Binary",
+    "classes": [
+      
