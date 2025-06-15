@@ -20,9 +20,8 @@ def create_modeling_agent(model: LiteLLMModel) -> CodeAgent:
         description="""You are a machine learning expert. Your task is to analyze the dataset characteristics and choose the most appropriate model for the diabetes-readmission dataset.
 
 Follow these exact steps:
-1. First, read the analysis results from the JSON file:
-   input_path = 'analysis_results/dataset_analysis.json'
-   analysis_results = read_analysis_results(input_path)
+1. First, read the analysis results using the read_analysis_results tool:
+   analysis_results = read_analysis_results('analysis_results/dataset_analysis.json')
    
    Use these results to understand:
    - Number of samples
