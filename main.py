@@ -2,7 +2,6 @@ from src.utils.model_setup import setup_model
 from src.agents.analysis_agent import create_analysis_agent
 from src.agents.modeling_agent import create_modeling_agent
 from src.agents.manager_agent import create_manager_agent
-import json
 import os
 
 def main():
@@ -19,7 +18,7 @@ def main():
     # First, check if analysis results exist
     if not os.path.exists('analysis_results/dataset_analysis.json'):
         print("Running analysis agent...")
-        analysis_result = manager_agent.run("Ask the global_analysis agent to analyze the diabetes-readmission dataset")
+        analysis_result = manager_agent.run("Analyze the diabetes-readmission dataset")
         print("Dataset Analysis Results:")
         print(analysis_result)
         print("\n" + "="*50 + "\n")
@@ -28,7 +27,7 @@ def main():
 
     # Then, train and evaluate models
     print("Running modeling agent...")
-    modeling_result = manager_agent.run("Ask the modeling agent to train and evaluate models on the diabetes-readmission dataset using AUC as the evaluation metric")
+    modeling_result = manager_agent.run("Train and evaluate models on the diabetes-readmission dataset using AUC as the evaluation metric")
     print("Modeling Results:")
     print(modeling_result)
 

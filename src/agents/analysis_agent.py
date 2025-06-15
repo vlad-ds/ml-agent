@@ -1,18 +1,16 @@
 from smolagents import CodeAgent
 from smolagents import LiteLLMModel
-import os
-from src.utils.file_tools import save_analysis_results
+from src.utils.file_tools import save_analysis_results, read_dataset
 
 def create_analysis_agent(model: LiteLLMModel) -> CodeAgent:
     """Create and configure the dataset analysis agent."""
     return CodeAgent(
         name="global_analysis",
-        tools=[save_analysis_results],
+        tools=[save_analysis_results, read_dataset],
         model=model,
         additional_authorized_imports=["time", "numpy", "pandas", "os", "datasets", "json"],
         description="""You are a dataset analysis expert. Your task is to analyze the diabetes-readmission dataset:
-1. Load the dataset using:
-   dataset = load_from_disk('datasets/diabetes-readmission')
+1. Load the dataset from "datasets/diabetes-readmission"
 2. Analyze the dataset structure and provide a comprehensive summary including:
    - The number of examples (using len(dataset))
    - The features/columns available (using dataset.features)

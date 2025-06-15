@@ -2,6 +2,7 @@ import json
 import os
 from typing import Dict, Any
 from smolagents import tool
+from datasets import load_from_disk
 
 @tool
 def save_analysis_results(results: Dict[str, Any], output_path: str) -> str:
@@ -29,3 +30,14 @@ def read_analysis_results(input_path: str) -> Dict[str, Any]:
     """
     with open(input_path, 'r') as f:
         return json.load(f) 
+    
+@tool
+def read_dataset(input_path: str) -> Dict[str, Any]:
+    """
+    Reads the user provided dataset
+    Args:
+        input_path: The path to the dataset
+    Returns:
+        The dataset
+    """
+    return load_from_disk(input_path)
