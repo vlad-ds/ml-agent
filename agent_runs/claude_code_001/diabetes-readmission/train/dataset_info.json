@@ -1,0 +1,648 @@
+{
+  "builder_name": "csv",
+  "citation": "",
+  "config_name": "default",
+  "dataset_name": "diabetes-readmission",
+  "dataset_size": 122929704,
+  "description": "",
+  "download_checksums": {
+    "hf://datasets/imodels/diabetes-readmission@191ab1f0aa68d52f6cd55d68df57849fad1751ca/train.csv": {
+      "num_bytes": 49159045,
+      "checksum": null
+    },
+    "hf://datasets/imodels/diabetes-readmission@191ab1f0aa68d52f6cd55d68df57849fad1751ca/test.csv": {
+      "num_bytes": 12292268,
+      "checksum": null
+    }
+  },
+  "download_size": 61451313,
+  "features": {
+    "time_in_hospital": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "num_lab_procedures": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "num_procedures": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "num_medications": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "number_outpatient": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "number_emergency": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "number_inpatient": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "number_diagnoses": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "change": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diabetesMed": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "race:AfricanAmerican": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "race:Asian": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "race:Caucasian": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "race:Hispanic": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "race:Other": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "gender:Female": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "gender:Male": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "age:70+": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "age:[0-10)": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "age:[10-20)": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "age:[20-50)": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "age:[50-70)": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "admission_type_id:Elective": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "admission_type_id:Emergency": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "admission_type_id:New Born": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "admission_type_id:Trauma Center": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "discharge_disposition_id:Discharged to Home": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "discharge_disposition_id:Other": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "admission_source_id:Emergency": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "admission_source_id:Other": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "admission_source_id:Referral": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "admission_source_id:Transfer": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Cardiology": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Emergency/Trauma": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Family/GeneralPractice": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Gastroenterology": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Hematology/Oncology": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:InternalMedicine": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Nephrology": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:ObstetricsandGynecology": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Orthopedics": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Other": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Psychiatry": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Pulmonology": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Radiology": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Surgery-Cardiovascular/Thoracic": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Surgery-General": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "medical_specialty:Urology": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Circulatory": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Diabetes": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Digestive": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Genitourinary": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Infectious": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Injury": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Mental": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Musculoskeletal": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Neoplasms": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Non-diabetes endocrine/metabolic": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Other": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Respiratory": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_1:Skin": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Circulatory": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Diabetes": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Digestive": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Genitourinary": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Infectious": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Injury": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Mental": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Musculoskeletal": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Neoplasms": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Non-diabetes endocrine/metabolic": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Other": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Respiratory": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_2:Skin": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Circulatory": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Diabetes": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Digestive": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Genitourinary": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Infectious": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Injury": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Mental": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Musculoskeletal": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Neoplasms": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Non-diabetes endocrine/metabolic": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Other": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Respiratory": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "diag_3:Skin": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "metformin:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "metformin:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "metformin:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "metformin:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "repaglinide:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "repaglinide:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "repaglinide:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "repaglinide:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "nateglinide:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "nateglinide:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "nateglinide:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "nateglinide:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "chlorpropamide:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "chlorpropamide:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "chlorpropamide:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "chlorpropamide:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glimepiride:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glimepiride:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glimepiride:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glimepiride:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glipizide:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glipizide:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glipizide:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glipizide:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glyburide:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glyburide:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glyburide:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glyburide:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "pioglitazone:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "pioglitazone:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "pioglitazone:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "pioglitazone:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "rosiglitazone:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "rosiglitazone:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "rosiglitazone:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "rosiglitazone:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "acarbose:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "acarbose:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "acarbose:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "acarbose:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "miglitol:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "miglitol:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "miglitol:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "miglitol:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "tolazamide:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "tolazamide:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "tolazamide:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "insulin:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "insulin:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "insulin:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "insulin:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glyburide-metformin:Down": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glyburide-metformin:No": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glyburide-metformin:Steady": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "glyburide-metformin:Up": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "A1Cresult:>7": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "A1Cresult:>8": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "A1Cresult:None": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "A1Cresult:Norm": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "max_glu_serum:>200": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "max_glu_serum:>300": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "max_glu_serum:None": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "max_glu_serum:Norm": {
+      "dtype": "float64",
+      "_type": "Value"
+    },
+    "readmitted": {
+      "dtype": "int64",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": "",
+  "size_in_bytes": 184381017,
+  "splits": {
+    "train": {
+      "name": "train",
+      "num_bytes": 98343280,
+      "num_examples": 81410,
+      "dataset_name": "diabetes-readmission"
+    },
+    "test": {
+      "name": "test",
+      "num_bytes": 24586424,
+      "num_examples": 20353,
+      "dataset_name": "diabetes-readmission"
+    }
+  },
+  "version": {
+    "version_str": "0.0.0",
+    "major": 0,
+    "minor": 0,
+    "patch": 0
+  }
+}
