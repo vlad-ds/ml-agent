@@ -42,4 +42,23 @@ def run_modeling(message: str) -> str:
 
     model = setup_model()
     modeling_agent = create_modeling_agent(model)
-    return modeling_agent.run(message) 
+    return modeling_agent.run(message)
+
+@tool
+def run_context(message: str) -> str:
+    """Run the context search agent and return its output.
+
+    Args:
+        message: The textual instruction or query from the user that should
+            be forwarded to the context search agent.
+
+    Returns:
+        A structured summary of relevant research, papers, and methodological
+        context related to the user's query.
+    """
+    from src.utils.model_setup import setup_model
+    from src.agents.context_agent import create_context_agent
+
+    model = setup_model()
+    context_agent = create_context_agent(model)
+    return context_agent.run(message)
