@@ -1,0 +1,20 @@
+Summary
+
+  I've created a comprehensive train_script.py that:
+
+  Dataset: 81,410 training samples with 150 features for diabetes readmission prediction
+  - Target is fairly balanced: 53.9% class 0, 46.1% class 1
+
+  Models tested:
+  - Logistic Regression: 0.6724 validation AUC
+  - Random Forest: 0.6810 validation AUC
+  - XGBoost: 0.6889 validation AUC (selected as best)
+
+  Key features:
+  - Loads data from HuggingFace dataset imodels/diabetes-readmission
+  - Preprocesses feature names for XGBoost compatibility
+  - Evaluates multiple models with cross-validation
+  - Exports trained XGBoost pipeline to diabetes_readmission_model.joblib
+  - Exports feature names to feature_names.joblib
+
+  The script is ready to run multiple times for iteration and produces a model optimized for AUC-ROC performance on the test set.
