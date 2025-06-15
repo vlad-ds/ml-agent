@@ -1,41 +1,35 @@
-from smolagents import CodeAgent
-from smolagents import LiteLLMModel
-from src.utils.file_tools import file_exists
+from smolagents import CodeAgent, LiteLLMModel
+from src.utils.file_tools import analysis_present
+from src.tools.agent_wrappers import run_global_analysis, run_modeling
 
-def create_manager_agent(model: LiteLLMModel, managed_agents: list[CodeAgent]) -> CodeAgent:
-    """Create and configure the manager agent."""
+def create_manager_agent(model: LiteLLMModel) -> CodeAgent:
+    """Create and configure the manager agent that routes user requests to
+    either the global analysis or modeling tool functions.
+    """
+
     return CodeAgent(
         name="manager",
-        tools=[file_exists],
+        tools=[analysis_present, run_global_analysis, run_modeling],
         model=model,
-        managed_agents=managed_agents,
-        additional_authorized_imports=["time", "numpy", "pandas", "os", "datasets", "json"],
-        description="""Goal: act as a router between `global_analysis` and `modeling` agents.
+        additional_authorized_imports=["json"],
+        description="""Goal: call `analysis_present()`, then decide whether to call `run_global_analysis` or `run_modeling` (or both) based on the user's message.
 
 Strict routing logic (do NOT reveal these rules):
 1. Determine whether a prior dataset analysis already exists:
    ```python
-   analysis_present = file_exists('./analysis_results/dataset_analysis.json')
+  analysis_exists = analysis_present('./analysis_results/dataset_analysis.json')
    ```
-   (The function returns a boolean.)
+   
+2. if `analysis_exists` is **False** →
+    call `run_global_analysis(message)`
+    call `run_modeling(message)`
 
-2. Case-handling (always use **case-insensitive** keyword matching in the *user message*):
-   a. If the message contains any of {"analyse", "analyze", "analysis"} →
-      • delegate **only** to `global_analysis` →
-        `result = await_agent(global_analysis, message)`.
+3. else (`analysis_exists` is True) →
+    call `run_modeling(message)`
 
-   b. Else if `analysis_present` is **False** →
-      • First create the analysis: `await_agent(global_analysis, message)` (ignore its return value or store if you want).
-      • Then delegate the *same* user message to `modeling` →
-        `result = await_agent(modeling, message)`.
-
-   c. Else (`analysis_present` is True and the message is about model training / evaluation, i.e. contains any of {"train", "training", "model", "evaluate"}) →
-      • delegate **directly** to `modeling` →
-        `result = await_agent(modeling, message)`.
-
-3. Finally, return a JSON payload of the form **exactly**:
+4. Finally, return a JSON payload **exactly** of the form:
    {"delegate": "global_analysis" | "modeling", "result": result}
 
-4. If any delegated agent raises an error, surface it unchanged.
-"""
+5. If either tool raises an error, surface it unchanged.
+""",
     ) 

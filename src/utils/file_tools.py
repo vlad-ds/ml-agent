@@ -63,7 +63,7 @@ def read_analysis_results(input_path: str) -> Dict[str, Any]:
         return json.load(f) 
 
 @tool
-def file_exists(path: str) -> bool:
+def analysis_present(path: str) -> bool:
     """Check if a given file path exists on disk.
 
     Args:
@@ -133,3 +133,14 @@ def read_json(path: str) -> Dict[str, Any]:
     """
     with open(path, "r") as fp:
         return json.load(fp)
+    
+@tool
+def save_model(model: Any, path: str) -> str:
+    """Save a model to disk.
+
+    Args:
+        model: The model to save.
+        path: Path to the directory where the model will be saved.
+    """
+    model.save(path)
+    return f"Model saved to {path}"

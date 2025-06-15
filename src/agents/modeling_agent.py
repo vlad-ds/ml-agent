@@ -1,18 +1,16 @@
 from smolagents import CodeAgent
 from smolagents import LiteLLMModel
-from src.utils.file_tools import read_analysis_results, load_dataset, set_seed, read_json
+from src.utils.file_tools import read_analysis_results, load_dataset, set_seed, read_json, save_model
 
 def create_modeling_agent(model: LiteLLMModel) -> CodeAgent:
     """Create and configure the modeling agent for training and evaluation."""
     return CodeAgent(
         name="model_training",
-        tools=[read_analysis_results, load_dataset, set_seed, read_json],
+        tools=[read_analysis_results, load_dataset, set_seed, read_json, save_model],
         model=model,
         additional_authorized_imports=[
-            "time", "numpy", "pandas", "os", "datasets", "json",
-            "catboost", "lightgbm", "sklearn.metrics", "sklearn.model_selection",
-            "sklearn.ensemble", "sklearn.linear_model", "sklearn.svm",
-            "sklearn.neural_network", "sklearn.preprocessing", "xgboost",
+            "time", "numpy", "pandas", "os", "json",
+            "catboost.*", "lightgbm.*", "xgboost.*", "sklearn.*",
             "datasets.load_from_disk"
         ],
         description="""Goal: train and evaluate the most suitable classifier for the `diabetes-readmission` dataset using AUC as the primary metric.
@@ -49,7 +47,9 @@ Workflow (do NOT echo):
      "feature_importance": <dict or list>,
      "notes": str
    }
-9. Return `modeling_report`.
+9. Save the best model to `models/best_model.pkl`
+10. Return `modeling_report`.
+
 
 If an error occurs, raise an Exception so the manager can surface it.
 """

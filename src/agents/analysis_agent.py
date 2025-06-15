@@ -9,7 +9,7 @@ def create_analysis_agent(model: LiteLLMModel) -> CodeAgent:
         tools=[save_analysis_results, load_dataset, set_seed],
         model=model,
         additional_authorized_imports=[
-            "time", "numpy", "pandas", "os", "datasets", "json", "matplotlib", "seaborn"
+            "time", "numpy", "pandas", "os", "datasets", "json", "matplotlib", "matplotlib.pyplot", "seaborn"
         ],
         description="""Goal: generate an exploratory analysis for the `datasets/diabetes-readmission` dataset and save it as JSON.
 
