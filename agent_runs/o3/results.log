@@ -1,0 +1,17 @@
+  The trained HistGradientBoosting model achieved the following performance on the test set:
+
+  Key Metrics:
+  - AUC-ROC: 0.6913 - The primary metric for binary classification
+  - Accuracy: 64.07% - Overall correct predictions
+  - Precision: 63.32% - Of predicted readmissions, 63% were correct
+  - Recall: 51.52% - Model identified 52% of actual readmissions
+  - F1-Score: 0.5681 - Harmonic mean of precision and recall
+
+  Confusion Matrix:
+  - True Negatives: 8,230 (correctly predicted no readmission)
+  - False Positives: 2,786 (incorrectly predicted readmission)
+  - False Negatives: 4,527 (missed actual readmissions)
+  - True Positives: 4,810 (correctly predicted readmission)
+
+  The model shows moderate performance with an AUC-ROC of 0.69, indicating reasonably good discrimination ability between readmitted and
+  non-readmitted patients. The validation AUC (0.6890) closely matches the test AUC (0.6913), suggesting good generalization without overfitting.
