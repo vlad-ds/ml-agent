@@ -1,0 +1,48 @@
+Starting diabetes readmission model evaluation...
+EVALUATION MODE: Test data only - no training data access!
+Loading TEST dataset...
+Test dataset loaded: (20353, 151)
+Preprocessing test data...
+Test features shape: (20353, 150)
+Test target distribution: {0: 11016, 1: 9337}
+Loading trained model...
+Model loaded successfully!
+Expected features: 150
+Validating feature consistency...
+Feature validation passed!
+Evaluating model on test data...
+
+==================================================
+TEST SET EVALUATION RESULTS
+==================================================
+Test set size: 20353
+AUC-ROC Score: 0.6910
+Accuracy: 0.6408
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.64      0.75      0.69     11016
+           1       0.63      0.51      0.57      9337
+
+    accuracy                           0.64     20353
+   macro avg       0.64      0.63      0.63     20353
+weighted avg       0.64      0.64      0.64     20353
+
+Confusion Matrix:
+[[8262 2754]
+ [4556 4781]]
+
+Detailed Metrics:
+True Negatives: 8262
+False Positives: 2754
+False Negatives: 4556
+True Positives: 4781
+Precision: 0.6345
+Recall: 0.5120
+F1-Score: 0.5667
+
+==================================================
+EVALUATION COMPLETED SUCCESSFULLY!
+FINAL AUC-ROC SCORE: 0.6910
+==================================================
