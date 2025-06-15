@@ -1,92 +1,56 @@
 from smolagents import CodeAgent
 from smolagents import LiteLLMModel
-import os
-from datasets import load_from_disk
-from src.utils.file_tools import read_analysis_results
+from src.utils.file_tools import read_analysis_results, load_dataset, set_seed, read_json
 
 def create_modeling_agent(model: LiteLLMModel) -> CodeAgent:
     """Create and configure the modeling agent for training and evaluation."""
     return CodeAgent(
-        name="modeling",
-        tools=[read_analysis_results],
+        name="model_training",
+        tools=[read_analysis_results, load_dataset, set_seed, read_json],
         model=model,
         additional_authorized_imports=[
             "time", "numpy", "pandas", "os", "datasets", "json",
-            "catboost", "sklearn.metrics", "sklearn.model_selection",
+            "catboost", "lightgbm", "sklearn.metrics", "sklearn.model_selection",
             "sklearn.ensemble", "sklearn.linear_model", "sklearn.svm",
             "sklearn.neural_network", "sklearn.preprocessing", "xgboost",
             "datasets.load_from_disk"
         ],
-        description="""You are a machine learning expert. Your task is to analyze the dataset characteristics and choose the most appropriate model for the diabetes-readmission dataset.
+        description="""Goal: train and evaluate the most suitable classifier for the `diabetes-readmission` dataset using AUC as the primary metric.
 
-Follow these exact steps:
-1. First, read the analysis results using the read_analysis_results tool:
-   analysis_results = read_analysis_results('analysis_results/dataset_analysis.json')
-   
-   Use these results to understand:
-   - Number of samples
-   - Types of features
-   - Missing values
-   - Class distribution
-   - Feature characteristics
+Workflow (do NOT echo):
+1. set_seed(42).
+   - All file reading must use the provided helper tools; never call `open()` directly.
+2. analysis = read_analysis_results('analysis_results/dataset_analysis.json')  # fetch metadata only
+   - Extract *only* the values you need (e.g., num_samples, features, class_distribution, feature types, missingness).
+   - Do NOT re-analyse or pretty-print the whole JSON; just store required fields.
+   - For any other JSON files, use `read_json(<path>)`.
+3. dataset = load_dataset(analysis['dataset_paths']['base_path'])
+   - train_df = dataset['train'].to_pandas()
+   - test_df  = dataset['test'].to_pandas()
+4. Decide on a model family based on:
+   - data size, feature types, missingness, imbalance (information in `analysis`).
+   - Available models: LogisticRegression, RandomForest, XGBoost, LightGBM, CatBoost, SVM, MLP.
+5. Pre-process:
+   - Impute / drop missing values as needed.
+   - Encode categoricals (unless using CatBoost).
+   - Scale numeric cols for linear/SVM/MLP models.
+   - If class imbalance > 1.5x, use class_weight="balanced" or sampling.
+6. Evaluation protocol:
+   - 5-fold StratifiedKFold.
+   - For each fold, compute accuracy and AUC.
+   - Use `predict_proba` if available else `decision_function` to obtain scores for ROC-AUC.
+7. After CV, fit on full train and evaluate on test_df.
+8. Build `modeling_report` dict:
+   {
+     "model": str,
+     "reasoning": str,
+     "cv_scores": {"accuracy": float, "auc": float},
+     "test_scores": {"accuracy": float, "auc": float},
+     "feature_importance": <dict or list>,
+     "notes": str
+   }
+9. Return `modeling_report`.
 
-2. Load and prepare the dataset using the paths from analysis_results:
-   dataset = load_from_disk(analysis_results['dataset_paths']['base_path'])
-   train_data = dataset["train"].to_pandas()
-   test_data = dataset["test"].to_pandas()
-
-3. Based on the analysis results, choose the most appropriate model:
-   Consider these factors:
-   - Dataset size:
-     * Small (< 10k samples): Logistic Regression, SVM, or Random Forest
-     * Medium (10k-100k): Random Forest, XGBoost, or LightGBM
-     * Large (> 100k): Gradient Boosting (XGBoost, LightGBM, CatBoost)
-   
-   - Feature types:
-     * Many categorical features: CatBoost or LightGBM
-     * Many numerical features: XGBoost or Random Forest
-     * Mixed types: CatBoost or LightGBM
-   
-   - Data quality:
-     * Many missing values: CatBoost
-     * High cardinality: LightGBM or CatBoost
-     * Many outliers: Random Forest or XGBoost
-   
-   - Class distribution:
-     * Imbalanced: Use class weights or sample weights
-     * Balanced: Any model with appropriate parameters
-
-4. Prepare the data according to the chosen model's requirements:
-   - Handle missing values appropriately
-   - Encode categorical variables if needed
-   - Scale numerical features if needed
-   - Handle class imbalance if present
-
-5. Set up cross-validation:
-   n_splits = 5
-   kf = KFold(n_splits=n_splits, shuffle=True, random_state=42)
-
-6. Train and evaluate the chosen model:
-   - Use appropriate hyperparameters based on the data characteristics
-   - For each fold:
-     - Train the model
-     - Calculate accuracy and AUC
-     - Store the results
-
-7. Train the final model on all training data and evaluate on test data:
-   - Use early stopping if available
-   - Use the best model from cross-validation
-   - Calculate feature importance
-   - Calculate test set metrics
-
-8. Return:
-   - The chosen model type and detailed reasoning for the choice
-   - Dataset characteristics that influenced the choice
-   - Average cross-validation scores (accuracy and AUC)
-   - Test set performance
-   - Feature importance from the final model
-   - Model performance analysis
-
-If any errors occur, explain what went wrong and what you tried to do.
+If an error occurs, raise an Exception so the manager can surface it.
 """
     ) 

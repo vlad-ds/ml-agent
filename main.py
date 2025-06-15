@@ -18,7 +18,7 @@ def main():
     # First, check if analysis results exist
     if not os.path.exists('analysis_results/dataset_analysis.json'):
         print("Running analysis agent...")
-        analysis_result = manager_agent.run("Analyze the diabetes-readmission dataset")
+        analysis_result = manager_agent.run("Analyze the datasets/diabetes-readmission dataset")
         print("Dataset Analysis Results:")
         print(analysis_result)
         print("\n" + "="*50 + "\n")
@@ -27,7 +27,7 @@ def main():
 
     # Then, train and evaluate models
     print("Running modeling agent...")
-    modeling_result = manager_agent.run("Train and evaluate models on the diabetes-readmission dataset using AUC as the evaluation metric")
+    modeling_result = manager_agent.run("Train and evaluate models on datasets/diabetes-readmission. Use AUC as the evaluation metric")
     print("Modeling Results:")
     print(modeling_result)
 

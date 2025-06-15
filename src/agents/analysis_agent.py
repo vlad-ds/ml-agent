@@ -1,42 +1,44 @@
 from smolagents import CodeAgent
 from smolagents import LiteLLMModel
-from src.utils.file_tools import save_analysis_results, read_dataset
+from src.utils.file_tools import save_analysis_results, load_dataset, set_seed
 
 def create_analysis_agent(model: LiteLLMModel) -> CodeAgent:
     """Create and configure the dataset analysis agent."""
     return CodeAgent(
         name="global_analysis",
-        tools=[save_analysis_results, read_dataset],
+        tools=[save_analysis_results, load_dataset, set_seed],
         model=model,
-        additional_authorized_imports=["time", "numpy", "pandas", "os", "datasets", "json"],
-        description="""You are a dataset analysis expert. Your task is to analyze the diabetes-readmission dataset:
-1. Load the dataset from "datasets/diabetes-readmission"
-2. Analyze the dataset structure and provide a comprehensive summary including:
-   - The number of examples (using len(dataset))
-   - The features/columns available (using dataset.features)
-   - A brief description of what the dataset seems to be about
-   - Types of features (categorical vs numerical)
-   - Missing values analysis
-   - Class distribution
-   - Feature distributions
-   - Correlations between features
-3. Save the analysis results to a JSON file:
-   analysis_results = {
-       'num_samples': len(dataset),
-       'features': list(dataset.features.keys()),
-       'feature_types': {col: str(dataset[col].dtype) for col in dataset.features},
-       'missing_values': {col: dataset[col].isna().sum() for col in dataset.features},
-       'class_distribution': dataset['readmitted'].value_counts().to_dict(),
-       'description': 'Your analysis description here',
-       'dataset_paths': {
-           'train': os.path.join('datasets', 'diabetes-readmission', 'train'),
-           'test': os.path.join('datasets', 'diabetes-readmission', 'test'),
-           'base_path': os.path.join('datasets', 'diabetes-readmission')
-       }
+        additional_authorized_imports=[
+            "time", "numpy", "pandas", "os", "datasets", "json", "matplotlib", "seaborn"
+        ],
+        description="""Goal: generate an exploratory analysis for the `datasets/diabetes-readmission` dataset and save it as JSON.
+
+Action guidelines (do NOT echo):
+1. set_seed(42) for reproducibility.
+2. dataset_dict = load_dataset('datasets/diabetes-readmission')
+3. Work on the **train** split unless stated otherwise: `df = dataset_dict['train'].to_pandas()`
+4. Produce these insights (at minimum):
+   - num_samples, num_features
+   - list of features with dtype & % missing
+   - class distribution of `readmitted`
+   - basic stats for numeric cols (mean, std) and value counts for categoricals
+   - correlation matrix for numeric cols
+5. (Optional) create insightful plots and save them under `analysis_results/plots/` if matplotlib is available.
+6. Build a python `dict` called `analysis_results` with:
+   {
+     "num_samples": <int>,
+     "features": [ {"name": str, "dtype": str, "pct_missing": float} ],
+     "class_distribution": <dict>,
+     "correlations": <dict>,
+     "dataset_paths": {
+         "train": "datasets/diabetes-readmission/train",
+         "test":  "datasets/diabetes-readmission/test",
+         "base_path": "datasets/diabetes-readmission"
+     }
    }
-   output_path = 'analysis_results/dataset_analysis.json'
-   save_analysis_results(analysis_results, output_path)
-4. Return the path to the saved file: 'analysis_results/dataset_analysis.json'
-5. If any errors occur, explain what went wrong and what you tried to do
+7. save_analysis_results(analysis_results, 'analysis_results/dataset_analysis.json')
+8. Return: 'analysis_results/dataset_analysis.json'
+
+If an error occurs, raise an Exception with a concise message so the manager can surface it.
 """
     ) 
